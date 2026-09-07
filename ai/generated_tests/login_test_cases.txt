@@ -1,0 +1,244 @@
+As a Senior QA Automation Engineer, I have analyzed the provided requirements and designed a comprehensive test suite covering functional, boundary, edge, and security scenarios for the login page. 
+
+Here is the structured test case document:
+
+---
+
+# Test Suite: Login Page Verification
+
+## 1. Positive Scenarios
+
+### TC-POS-001: Successful Login with Valid Standard Credentials
+* **Test Case ID:** TC-POS-001
+* **Title:** Verify successful login with valid username and password
+* **Description:** Ensure that users with registered and active credentials can successfully log into the application and are redirected to the home/dashboard page.
+* **Preconditions:** 
+  * The user has a valid, active account in the system.
+  * The user is on the Login page.
+* **Test Steps:**
+  1. Enter a valid registered username in the Username field.
+  2. Enter the corresponding valid password in the Password field.
+  3. Click the "Login" (or equivalent) button.
+* **Expected Result:** 
+  * The user is successfully authenticated.
+  * The user is redirected to the application's home/dashboard page.
+  * A welcome message or user session is initiated.
+* **Priority:** High
+
+### TC-POS-002: Successful Login using 'Enter' Key
+* **Test Case ID:** TC-POS-002
+* **Title:** Verify login functionality using the keyboard 'Enter' key
+* **Description:** Ensure users can submit the login form by pressing the 'Enter' key while focused on the password field.
+* **Preconditions:** The user is on the Login page with valid credentials populated in the input fields.
+* **Test Steps:**
+  1. Enter a valid username.
+  2. Enter a valid password.
+  3. Press the 'Enter' key on the keyboard.
+* **Expected Result:** The form is submitted, and the user is successfully logged into the application.
+* **Priority:** Medium
+
+---
+
+## 2. Negative Scenarios
+
+### TC-NEG-001: Login with Invalid Username and Valid Password
+* **Test Case ID:** TC-NEG-001
+* **Title:** Verify error message with unregistered username
+* **Description:** Ensure the application denies access and displays an appropriate error message when an unknown username is provided with a valid password.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter an unregistered/invalid username.
+  2. Enter a valid password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Login fails.
+  * An appropriate error message is displayed (e.g., "Invalid username or password").
+  * The user remains on the login page.
+* **Priority:** High
+
+### TC-NEG-002: Login with Valid Username and Invalid Password
+* **Test Case ID:** TC-NEG-002
+* **Title:** Verify error message with incorrect password
+* **Description:** Ensure the application denies access when a valid username is paired with an incorrect password.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter a valid username.
+  2. Enter an incorrect password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Login fails.
+  * An appropriate error message is displayed (e.g., "Invalid username or password").
+  * Password field is cleared (best practice for security).
+* **Priority:** High
+
+### TC-NEG-003: Login with Empty Username and Valid Password
+* **Test Case ID:** TC-NEG-003
+* **Title:** Verify validation error when username is empty
+* **Description:** Ensure users cannot log in when the username field is left blank.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Leave the Username field empty.
+  2. Enter a valid password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Login is prevented.
+  * Inline validation error or general error message is displayed (e.g., "Username cannot be blank").
+* **Priority:** High
+
+### TC-NEG-004: Login with Valid Username and Empty Password
+* **Test Case ID:** TC-NEG-004
+* **Title:** Verify validation error when password is empty
+* **Description:** Ensure users cannot log in when the password field is left blank.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter a valid username.
+  2. Leave the Password field empty.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Login is prevented.
+  * Inline validation error or general error message is displayed (e.g., "Password cannot be blank").
+* **Priority:** High
+
+### TC-NEG-005: Login with Both Fields Empty
+* **Test Case ID:** TC-NEG-005
+* **Title:** Verify validation error when both fields are empty
+* **Description:** Ensure submission is blocked when neither username nor password is provided.
+* **Preconditions:** The user is on the Login page with empty fields.
+* **Test Steps:**
+  1. Ensure both Username and Password fields are empty.
+  2. Click the "Login" button.
+* **Expected Result:** 
+  * Login is prevented.
+  * Appropriate error messages are displayed for both fields.
+* **Priority:** High
+
+---
+
+## 3. Boundary Cases
+
+### TC-BND-001: Minimum Length Username and Password
+* **Test Case ID:** TC-BND-001
+* **Title:** Verify login with minimum allowed character lengths
+* **Description:** Test system behavior when credentials match the exact minimum boundary length allowed by system specifications (e.g., 3-character username, 6-character password).
+* **Preconditions:** An account exists with minimum-length credentials.
+* **Test Steps:**
+  1. Enter a username of minimum allowed length.
+  2. Enter a password of minimum allowed length.
+  3. Click the "Login" button.
+* **Expected Result:** Login succeeds if credentials are correct.
+* **Priority:** Medium
+
+### TC-BND-002: Maximum Length Username and Password
+* **Test Case ID:** TC-BND-002
+* **Title:** Verify login with maximum allowed character lengths
+* **Description:** Test system behavior when credentials match the maximum allowed character limit.
+* **Preconditions:** An account exists with maximum-length credentials.
+* **Test Steps:**
+  1. Enter a username of maximum allowed length.
+  2. Enter a password of maximum allowed length.
+  3. Click the "Login" button.
+* **Expected Result:** Login succeeds without truncation issues or system crashes.
+* **Priority:** Medium
+
+### TC-BND-003: Exceeding Maximum Length for Username
+* **Test Case ID:** TC-BND-003
+* **Title:** Verify input restriction when username exceeds maximum length
+* **Description:** Ensure the UI prevents typing beyond the maximum character limit or handles the overflow gracefully.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Attempt to enter a username exceeding the maximum allowed limit (e.g., > 255 characters).
+  2. Enter a valid password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * The input field restricts further typing, OR the system rejects the input cleanly with an error.
+  * Login fails securely.
+* **Priority:** Low
+
+---
+
+## 4. Edge Cases
+
+### TC-EDG-001: Leading and Trailing Spaces in Credentials
+* **Test Case ID:** TC-EDG-001
+* **Title:** Verify login behavior with accidental leading/trailing spaces
+* **Description:** Check if the application trims accidental whitespaces in username/password fields during login submission.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter a valid username with a leading and/or trailing space (e.g., " user123 ").
+  2. Enter a valid password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * *Note on expected behavior:* Ideally, the system trims whitespace automatically and logs the user in, OR fails gracefully. (Specify based on business logic; standard expectation is sanitization or distinct error).
+* **Priority:** Low
+
+### TC-EDG-002: Case Sensitivity of Username and Password
+* **Test Case ID:** TC-EDG-002
+* **Title:** Verify case sensitivity for passwords and usernames
+* **Description:** Ensure passwords are strictly case-sensitive, and usernames behave according to business rules (usually case-insensitive for email/usernames, but strict for passwords).
+* **Preconditions:** A user exists with mixed-case credentials (e.g., User: `JohnDoe`, Pass: `P@ssw0rd`).
+* **Test Steps:**
+  1. Enter the username in all lowercase (`johndoe`).
+  2. Enter the password with altered casing (`p@ssw0rd`).
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Password validation fails due to incorrect casing.
+  * Username handles according to system design (passes if case-insensitive, fails if strict).
+* **Priority:** Medium
+
+### TC-EDG-003: Multiple Rapid Submissions (Double Click)
+* **Test Case ID:** TC-EDG-003
+* **Title:** Verify system handling of rapid consecutive login clicks (Throttling)
+* **Description:** Ensure clicking the login button multiple times rapidly does not cause race conditions, duplicate sessions, or application errors.
+* **Preconditions:** Valid credentials are entered on the login page.
+* **Test Steps:**
+  1. Enter valid credentials.
+  2. Double-click or rapidly click the "Login" button multiple times.
+* **Expected Result:** 
+  * The login button becomes disabled or shows a loading spinner after the first click.
+  * Only one authentication request is processed, resulting in a single successful login.
+* **Priority:** Medium
+
+---
+
+## 5. Security-Related Input Cases
+
+### TC-SEC-001: SQL Injection (SQLi) in Username Field
+* **Test Case ID:** TC-SEC-001
+* **Title:** Verify vulnerability protection against SQL Injection in username
+* **Description:** Ensure the login form properly sanitizes inputs to prevent SQL injection bypass attacks.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter a SQL injection payload in the Username field (e.g., `' OR '1'='1`).
+  2. Enter any random string in the Password field.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * Login must fail.
+  * The system must treat the input strictly as a literal string, displaying an invalid credentials error without exposing database errors or bypassing authentication.
+* **Priority:** High
+
+### TC-SEC-002: Cross-Site Scripting (XSS) in Username Field
+* **Test Case ID:** TC-SEC-002
+* **Title:** Verify protection against Reflected XSS in input fields
+* **Description:** Ensure that malicious script inputs are neutralized and not executed or rendered in the DOM.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Enter an XSS payload in the Username field (e.g., `<script>alert('XSS')</script>`).
+  2. Enter a valid or invalid password.
+  3. Click the "Login" button.
+* **Expected Result:** 
+  * The script does not execute.
+  * Input is properly encoded/escaped by the application when rendered back on the screen.
+* **Priority:** High
+
+### TC-SEC-003: Password Masking (Obfuscation)
+* **Test Case ID:** TC-SEC-003
+* **Title:** Verify that password characters are masked
+* **Description:** Ensure characters typed into the password field are hidden from view (displayed as dots, asterisks, etc.) to prevent shoulder surfing.
+* **Preconditions:** The user is on the Login page.
+* **Test Steps:**
+  1. Focus on the Password field.
+  2. Type a sequence of characters.
+* **Expected Result:** 
+  * All entered characters are masked visually (e.g., `••••••••`).
+  * (Optional) If a "Show Password" toggle exists, verify it correctly reveals and hides the text upon interaction.
+* **Priority:** High
